@@ -1,0 +1,85 @@
+<app-menu></app-menu>
+
+<div class="container" style="margin-top: 20px;">
+  <div class="row">
+    <div class="col-12">
+      <table class="table table-hover table-bordered table-striped">
+        <thead class="thead-dark">
+          <th>Nom</th>
+          <th>Description</th>
+          <th>Statut</th>
+          <th>Action</th>
+        </thead>
+        <tr *ngFor="let objet of objets; let i = index">
+          <td>
+            <a [routerLink]="[objet.nom]">{{ objet.nom }} </a>
+          </td>
+          <td>{{ objet.description }}</td>
+          <td>{{ objet.status }}</td>
+
+          <td>
+            <input
+              type="button"
+              class="btn btn-sm btn-success"
+              style="margin:5px;"
+              value="supprimer"
+              (click)="supprimer(i)"
+            /><input
+              type="button"
+              value="Modifier"
+              class="btn btn-danger btn-sm"
+              style="margin:5px;"
+              (click)="modifier(objet, i)"
+            />
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="row" *ngIf="temoin">
+    <div class="col">
+      <form>
+        <div class="form-group">
+          <label>Nom du projet : </label>
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="projet.nom"
+            [ngModelOptions]="{ standalone: true }"
+          />
+        </div>
+        <div class="form-group">
+          <label>description : </label>
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="projet.description"
+            [ngModelOptions]="{ standalone: true }"
+          />
+        </div>
+        <div class="form-group">
+          <label>Status : </label>
+          <select
+            class="form-control"
+            [(ngModel)]="projet.status"
+            [ngModelOptions]="{ standalone: true }"
+          >
+            <option value="En cours">En cours</option>
+            <option value="Réalisé">Réalisé</option>
+            <option value="Livré">Livré</option>
+            <option value="Cloturé">Cloturé</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <button
+            (click)="validermodification()"
+            class="btn btn-success btn-lg"
+          >
+            Valider
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
